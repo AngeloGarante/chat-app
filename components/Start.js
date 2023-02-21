@@ -103,7 +103,7 @@ const styles = StyleSheet.create(
             width: "88%",
             height: "44%",
             justifyContent: "space-evenly",
-            position: 'absolute ',
+            position: 'absolute',
             left: 18,
             top: 350,
 
