@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import { View, Text, Button, StyleSheet, TextInput, ImageBackground, TouchableOpacity } from 'react-native';
 
+const backgroundColors = {
+    black: { backgroundColor: "#090C08" },
+    purple: { backgroundColor: "#474056" },
+    grey: { backgroundColor: "#d8d1d8" },
+    green: { backgroundColor: "#94ae89" },
+};
 export default class Start extends Component {
     constructor(props) {
         super(props);
-        this.state = { name: "" }
+        this.state = { name: "", color: "" }
     }
     render() {
+        const { black, purple, grey, green } = backgroundColors;
         return (
             <View style={styles.container}>
                 <ImageBackground source={require("../assets/Background-Image.png")} style={[styles.container, styles.backgroundImage]}>
@@ -23,17 +30,33 @@ export default class Start extends Component {
 
                         <Text style={{ fontSize: 16, fontWeight: "300", color: "#757083", opacity: 100, }}>Choose background color:</Text>
                         <View style={styles.panelSelector}>
+                            <TouchableOpacity
+                                style={[styles.color, black,
+                                this.state.color === black.backgroundColor ? styles.colorSelected : {}]}
+                                onPress={() => this.setState({ color: black.backgroundColor })}
+                            />
+                            <TouchableOpacity
+                                style={[styles.color, purple,
+                                this.state.color === purple.backgroundColor ? styles.colorSelected : {}]}
+                                onPress={() => this.setState({ color: purple.backgroundColor })}
+                            />
+                            <TouchableOpacity
+                                style={[styles.color, grey,
+                                this.state.color === grey.backgroundColor ? styles.colorSelected : {}]}
+                                onPress={() => this.setState({ color: grey.backgroundColor })}
+                            />
+                            <TouchableOpacity
+                                style={[styles.color, green,
+                                this.state.color === green.backgroundColor ? styles.colorSelected : {}]}
+                                onPress={() => this.setState({ color: green.backgroundColor })}
+                            />
 
-                            <View style={{ borderRadius: 25, backgroundColor: "#090C08", width: 50, height: 50, }}></View>
-                            <View style={{ borderRadius: 25, backgroundColor: "#474056", width: 50, height: 50, }}></View>
-                            <View style={{ borderRadius: 25, backgroundColor: "#8A95A5", width: 50, height: 50, }}></View>
-                            <View style={{ borderRadius: 25, backgroundColor: "#B9C6AE", width: 50, height: 50, }}></View>
 
                         </View>
                         <TouchableOpacity
 
                             style={styles.startButton}
-                            onPress={() => this.props.navigation.navigate("Chat", { name: this.state.name })} >
+                            onPress={() => this.props.navigation.navigate("Chat", { name: this.state.name, color: this.state.color })} >
                             <Text style={{ fontSize: 16, fontWeight: "600", color: "#FFFFFF", }}> Start to Chat</Text>
                         </TouchableOpacity>
                     </View>
@@ -107,6 +130,17 @@ const styles = StyleSheet.create(
             left: 18,
             top: 350,
 
+        },
+        color: {
+            borderRadius: 25,
+            width: 50,
+            height: 50,
+
+        },
+        colorSelected: {
+            borderStyle: "solid",
+            borderWidth: 2,
+            borderColor: "#5f5f5f",
         }
 
     }
