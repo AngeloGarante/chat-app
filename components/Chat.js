@@ -13,13 +13,14 @@ export default class Chat extends Component {
         super();
         this.state = {
             messages: [],
-            user: "",
+            user: {
+                name: "",
+            }
         }
 
     }
     componentDidMount() {
         this.referenceChatMessages = firebase.firestore().collection("messages");
-        this.unsubscribe = this.referenceChatMessages.onSnapshot(this.onChatUpdate);
         let name = this.props.route.params.name;
         this.props.navigation.setOptions({ title: name });
         this.setState({
@@ -38,7 +39,9 @@ export default class Chat extends Component {
             }
             this.setState({
                 messages: [],
-                user: this.props.route.params.name,
+                user: {
+                    name,
+                },
 
             });
             this.unsubscribe = this.referenceChatMessages
@@ -60,7 +63,11 @@ export default class Chat extends Component {
             messages.push({
                 text: data.text,
                 createdAt: data.createdAt.toDate(),
-                user: this.props.route.params.name
+                user: this.props.route.params.name,
+                _id: data._id,
+                user: {
+                    name: data.user.name,
+                },
             })
         })
         this.setState({ messages })
@@ -70,7 +77,10 @@ export default class Chat extends Component {
         this.referenceChatMessages.add({
             createdAt: message.createdAt,
             text: message.text || "",
-            user: this.props.route.params.name,
+            user: {
+                name: this.props.route.params.name,
+            }
+            ,
             _id: message._id
         })
     }
@@ -107,9 +117,7 @@ export default class Chat extends Component {
                     renderBubble={this.renderBubble.bind(this)}
                     messages={this.state.messages}
                     onSend={messages => this.onSend(messages)}
-                    user={{
-                        name: this.state.user.name
-                    }}
+                    key={this.state.messages._id}
                 />
                 {Platform.OS === 'android' ? <KeyboardAvoidingView behavior="height" /> : null
                 }
