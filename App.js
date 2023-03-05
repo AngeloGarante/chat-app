@@ -8,6 +8,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Start from "./components/Start";
 import Chat from "./components/Chat"
 
+
+
 const Stack = createStackNavigator();
 export default class App extends Component {
   render() {
