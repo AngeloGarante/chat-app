@@ -13,9 +13,8 @@ time.
 ● As a user with a visual impairment, I want to use a chat app that is compatible with a screen
 reader so that I can engage with a chat interface.
 
-first commit:
-
-Exercise 1: Building Native Applications with JavaScript
-● Set up your development environment to work with React Native and Expo.
-● Create the app’s layout using native UI components and style the start screen based on the
-screen designs you received.
+waiting for review
+● Inplemented views
+● Inplemented chat functionality
+● implemented firebase database
+● implemented access permission (camera-library-geolocation)
